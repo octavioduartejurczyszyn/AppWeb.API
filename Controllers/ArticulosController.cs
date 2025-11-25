@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using AppWeb.API.Business;
-using AppWeb.API.Models;
+﻿using AppWeb.API.Business;
+using AppWeb.API.Models.DTOs;
+using AppWeb.API.Services; 
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace AppWeb.API.Controllers
 {
@@ -8,106 +10,60 @@ namespace AppWeb.API.Controllers
     [Route("api/[controller]")]
     public class ArticulosController : ControllerBase
     {
-        private readonly ArticuloService _articuloService;
+        private readonly IArticuloService _service;
 
-        public ArticulosController(ArticuloService articuloService)
+        public ArticulosController(IArticuloService service)
         {
-            _articuloService = articuloService;
+            _service = service;
         }
-
-        // GET: api/articulos
 
         [HttpGet]
-        public IActionResult Listar()
+        public async Task<IActionResult> GetAll()
         {
-            try
-            {
-                var lista = _articuloService.Listar();
-                return Ok(lista);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error al obtener artículos: {ex.Message}");
-            }
+            var articulos = await _service.GetAllAsync();
+            return Ok(articulos);
         }
 
-        // GET: api/articulos/filtrar?campo=Marca&criterio=Comienza%20con&filtro=Sam
-
-        [HttpGet("filtrar")]
-        public IActionResult Filtrar(string campo, string criterio, string filtro)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetById(int id)
         {
-            try
-            {
-                var resultado = _articuloService.Filtrar(campo, criterio, filtro);
-                return Ok(resultado);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error al filtrar artículos: {ex.Message}");
-            }
+            var articulo = await _service.GetByIdAsync(id);
+            if (articulo == null)
+                return NotFound(new { message = $"No existe artículo con id {id}" });
+            return Ok(articulo);
         }
-
-        // POST: api/articulos
 
         [HttpPost]
-        public IActionResult Post([FromBody] Articulo articulo)
+        public async Task<IActionResult> Create([FromBody] ArticuloCreateDto dto)
         {
-            if (articulo == null)
-                return BadRequest("El artículo no puede ser nulo.");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            try
-            {
-                _articuloService.Agregar(articulo);
-                return Ok("Artículo agregado correctamente.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error al agregar artículo: {ex.Message}");
-            }
+            var created = await _service.CreateAsync(dto);
+
+            // CreatedAtAction devuelve 201 con la ruta al recurso creado
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        // PUT: api/articulos/{id}
-
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Articulo articulo)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] ArticuloUpdateDto dto)
         {
-            if (articulo == null)
-                return BadRequest("El artículo no puede ser nulo.");
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            try
-            {
-                _articuloService.Modificar(id, articulo);
-                return Ok("Artículo modificado correctamente.");
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound($"No se encontró un artículo con el ID {id}.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error al modificar artículo: {ex.Message}");
-            }
+            var updated = await _service.UpdateAsync(id, dto);
+            if (updated == null)
+                return NotFound(new { message = $"No existe artículo con id {id}" });
+
+            return Ok(updated);
         }
 
-        // DELETE: api/articulos/{id}
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-                _articuloService.Eliminar(id);
-                return Ok("Artículo eliminado correctamente.");
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound($"No se encontró un artículo con el ID {id}.");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error al eliminar artículo: {ex.Message}");
-            }
-        }
+            var deleted = await _service.DeleteAsync(id);
+            if (!deleted)
+                return NotFound(new { message = $"No existe artículo con id {id}" });
 
+            return NoContent(); // 204
+        }
     }
 }
