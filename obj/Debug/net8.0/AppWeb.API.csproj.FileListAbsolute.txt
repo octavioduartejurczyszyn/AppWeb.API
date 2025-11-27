@@ -175,3 +175,4 @@ C:\Users\octav\Desktop\Api Rest\octavio-duarte\AppWeb.API\obj\Debug\net8.0\refin
 C:\Users\octav\Desktop\Api Rest\octavio-duarte\AppWeb.API\obj\Debug\net8.0\AppWeb.API.pdb
 C:\Users\octav\Desktop\Api Rest\octavio-duarte\AppWeb.API\obj\Debug\net8.0\AppWeb.API.genruntimeconfig.cache
 C:\Users\octav\Desktop\Api Rest\octavio-duarte\AppWeb.API\obj\Debug\net8.0\ref\AppWeb.API.dll
+C:\Users\octav\Desktop\Api Rest\octavio-duarte\AppWeb.API\obj\Debug\net8.0\AppWeb.API.sourcelink.json
