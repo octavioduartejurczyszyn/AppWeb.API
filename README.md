@@ -55,9 +55,10 @@ AppWeb.API/
 ├── Data/
 │ └── AppDbContext.cs
 ├── Docs/
-│ ├── Swagger.png
-│ ├── Swagger1.png
-│ └── Swagger2.png
+│ ├── catalogo.png
+│ ├── get_articulo.png
+│ ├── get_categoria.png
+│ └── post_articulo.png
 │
 ├── appsettings.json
 │
@@ -110,8 +111,18 @@ Swagger se habilita automáticamente al ejecutar el proyecto en modo Development
 
 URL típica:
 
-https://localhost
-:<puerto>/swagger
+https://localhost:<puerto>/swagger
+
+## 📸 Capturas de Swagger (Pruebas reales)
+
+Ejemplos incluidos:
+
+- `catalogo.png`
+- `get_articulo.png`
+- `get_categoria.png`
+- `post_articulo.png`
+
+Estas imágenes muestran el correcto funcionamiento de los endpoints principales.
   
   ---
 
