@@ -1,100 +1,107 @@
-# 🧩 API de Gestión de Artículos 
-API REST desarrollada con **ASP.NET Core** y **Entity Framework Core**, diseñada para administrar artículos, marcas y categorías de manera estructurada, escalable y mantenible. 
-Este proyecto forma parte de mi práctica profesional en desarrollo **back-end**, siguiendo buenas prácticas de arquitectura, separación por capas y uso de **Entity Framework** para el acceso a datos.
+# 🧩 AppWeb.API — API REST en ASP.NET Core 8 + SQL Server + EF Core
+Este es un proyecto de API REST desarrollado con ASP.NET Core 8, siguiendo una arquitectura profesional basada en capas, con acceso a datos mediante Entity Framework Core, y documentada con Swagger.
 
 ---
 
 ## 🚀 Tecnologías utilizadas
 
-- **ASP.NET Core Web API**  
-- **Entity Framework Core**  
-- **SQL Server**  
-- **LINQ**  
-- **Inyección de dependencias (DI)**  
-- **Patrón Repository / Service Layer (aplicado en ArticuloService)**
+- **C# / .NET 8**
+- **ASP.NET Core Web API**
+- **Entity Framework Core 8**
+- **SQL Server**
+- **Swagger / Swashbuckle**
+- **LINQ**
+- **DTOs y Services por capas**
+- **Arquitectura limpia por responsabilidad**
  
     ---
   
   ## 🧱 Arquitectura del proyecto
-  La solución está organizada por capas para favorecer la mantenibilidad y escalabilidad:
+ El proyecto está organizado en capas de manera clara y extensible:
+ 
 ```
-AppWeb.API
+AppWeb.API/
 │
-├── Controllers
-│ └── ArticulosController.cs # Gestiona las peticiones HTTP
+├── Controllers/
+│ ├── ArticulosController.cs
+│ ├── CategoriasController.cs
+│ └── MarcasController.cs
 │
-├── Business
-│ └── ArticuloService.cs # Lógica de negocio 
+├── Models/
+│ ├── Articulo.cs
+│ ├── Categoria.cs
+│ ├── Marca.cs
+│ └── DTOs/
+│ ├── ArticuloDtos.cs
+│ ├── CategoriaDtos.cs
+│ └── MarcaDtos.cs
 │
-├── Data
-│ └── AppDbContext.cs 
+├── Services/
+│ ├── IArticuloService.cs
+│ ├── ICategoriaService.cs
+│ ├── IMarcaService.cs
+│ ├── ArticuloService.cs
+│ ├── CategoriaService.cs
+│ └── MarcaService.cs
 │
-├── Models
-│ ├── Articulo.cs # Entidad principal
-│ ├── Marca.cs # Entidad relacionada
-│ └── Categoria.cs # Entidad relacionada
+├── Data/
+│ └── AppDbContext.cs
 │
-└── Program.cs 
+└── appsettings.json
 ```
 
 ---
 
 ## 📡 Endpoints principales
-
+### 🟦 Artículos
 | Método | Endpoint | Descripción |
 |--------|-----------|-------------|
-| **GET** | `/api/articulos` | Obtiene todos los artículos con su marca y categoría. |
-| **GET** | `/api/articulos/filtrar` | Permite filtrar artículos por campo, criterio y valor. |
+| **GET** | `/api/articulos` | Obtiene todos los artículos. |
+| **GET** | `/api/articulos/{id}` | Obtiene un artículo por su ID. |
 | **POST** | `/api/articulos` | Agrega un nuevo artículo. |
 | **PUT** | `/api/articulos/{id}` | Modifica un artículo existente. |
 | **DELETE** | `/api/articulos/{id}` | Elimina un artículo por su ID. |
+### 🟧 Categorías
+| Método | Endpoint | Descripción |
+|--------|-----------|-------------|
+| **GET** | `/api/marcas` | Obtiene todas las marcas. |
+| **GET** | `/api/marcas/{id}` | Obtiene una marca por su ID. |
+| **POST** | `/api/marcas` | Agrega una nueva marca. |
+| **PUT** | `/api/marcas/{id}` | Modifica una marca existente. |
+| **DELETE** | `/api/marcas/{id}` | Elimina una marca por su ID. |
 
-Ejemplo de respuesta (GET `/api/articulos`):
- 
-> ```json
-> [
->   {
->     "id": 1,
->     "nombre": "Notebook HP 15",
->     "descripcion": "Portátil con procesador Intel i5",
->     "precio": 799.99,
->     "imagenUrl": "https://ejemplo.com/hp15.jpg",
->     "marca": { "id": 1, "descripcion": "HP" },
->     "categoria": { "id": 1, "descripcion": "Informática" }
->   }
-> ]
-> ```
+### 🟥 Marcas
+| Método | Endpoint | Descripción |
+|--------|-----------|-------------|
+| **GET** | `/api/marcas` | Obtiene todas las marcas. |
+| **GET** | `/api/marcas/{id}` | Obtiene una marca por su ID. |
+| **POST** | `/api/marcas` | Agrega una nueva marca. |
+| **PUT** | `/api/marcas/{id}` | Modifica una marca existente. |
+| **DELETE** | `/api/marcas/{id}` | Elimina una marca por su ID. |
 
- ---
  
-  ## ⚙️ Configuración del entorno
-  1.Clonar el repositorio:  
-  git clone https://github.com/octavioduartejurczyszyn/AppWeb.API.git
-  2.Configurar la cadena de conexión en el archivo appsettings.json:  
- "ConnectionStrings": {
-  "DefaultConnection": "Server=TU_SERVIDOR;Database=AppWebDB;Trusted_Connection=True;TrustServerCertificate=True;"
-}  
-  3.Aplicar las migraciones y crear la base de datos: dotnet ef database update  
-  4.Ejecutar el proyecto:  
-  dotnet run  
-  5.Acceder a Swagger UI (documentación interactiva):  
-  https://localhost:5001/swagger  
+  ## 🔍 Swagger
   
-  ---
+[https://localhost:<puerto>/swagger](https://localhost:7125/swagger/v1/swagger.json)
   
-  ## Buenas prácticas aplicadas:  
-  Separación por capas (Controller, Business, Data, Models).  
-  Uso de Entity Framework Core con DbContext para el acceso a datos.   
-  Inyección de dependencias configurada en Program.cs. Manejo de excepciones y validaciones básicas.   
-  Código preparado para escalar a nuevas entidades o controladores.   
+  --- 
   
   👨‍💻 Autor Octavio Duarte  
   Desarrollador Back-End | .NET & C#  
   📍 Valencia, España  
 
-  ⚠️ Este proyecto está configurado con EF Core y una base de datos local (LocalDB).
-Si deseás ejecutarlo, solo necesitás tener instalado SQL Server Express o LocalDB.
-En caso de solo revisar el código, no es necesario modificar la conexión: el código es funcional y sigue las buenas prácticas de EF Core.
+## ⚠️ Nota sobre la base de datos
+
+Este proyecto utiliza una base de datos local preexistente llamada **CATALOGO_DB**, que contiene las tablas:
+
+- Articulos  
+- Categorias  
+- Marcas  
+
+Actualmente **no se incluye un script SQL** para crear estas tablas, ya que la base proviene de un proyecto anterior y fue reutilizada para esta API.
+Por este motivo, **la API no puede ejecutarse directamente en otros ordenadores** sin recrear manualmente la estructura de la base de datos.
+No obstante, en la sección “Capturas de Swagger” se muestran pruebas reales de la API funcionando correctamente con la base de datos existente.
+
 
 
 
