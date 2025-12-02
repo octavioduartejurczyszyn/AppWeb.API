@@ -1,4 +1,3 @@
-using AppWeb.API.Business;
 using AppWeb.API.Data;
 using AppWeb.API.Services;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +11,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Esto hace que cada vez que algún controlador o servicio necesite ArticuloService,
 // ASP.NET lo cree automáticamente e inyecte sus dependencias (como AppDbContext, si lo necesita).
 builder.Services.AddScoped<IArticuloService, ArticuloService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IMarcaService, MarcaService>();
+
+
 
 
 builder.Services.AddControllers();
