@@ -112,19 +112,6 @@ URL típica:
 
 https://localhost
 :<puerto>/swagger
-
----
-
-## 📸 Capturas de Swagger (Pruebas reales)
-
-### Listado de artículos
-![GET Artículos](docs/Swagger.png)
-
-### Creación de artículo
-![POST Artículos](docs/Swagger1.png)
-
-### Categorías
-![GET Categorías](docs/Swagger2.png)
   
   ---
 
