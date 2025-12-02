@@ -1,5 +1,12 @@
 # 🧩 AppWeb.API — API REST en ASP.NET Core 8 + SQL Server + EF Core
-Este es un proyecto de API REST desarrollado con ASP.NET Core 8, siguiendo una arquitectura profesional basada en capas, con acceso a datos mediante Entity Framework Core, y documentada con Swagger.
+
+Este es un proyecto de API REST desarrollado con **ASP.NET Core 8**, siguiendo una arquitectura profesional basada en **capas**, con acceso a datos mediante **Entity Framework Core**, y documentada con **Swagger**.
+
+Incluye CRUD completo para:
+
+- **Artículos**
+- **Categorías**
+- **Marcas**
 
 ---
 
@@ -13,11 +20,12 @@ Este es un proyecto de API REST desarrollado con ASP.NET Core 8, siguiendo una a
 - **LINQ**
 - **DTOs y Services por capas**
 - **Arquitectura limpia por responsabilidad**
- 
-    ---
-  
-  ## 🧱 Arquitectura del proyecto
- El proyecto está organizado en capas de manera clara y extensible:
+
+---
+
+## 🧱 Arquitectura del proyecto
+
+El proyecto está organizado en capas de manera clara y extensible:
  
 ```
 AppWeb.API/
@@ -46,14 +54,22 @@ AppWeb.API/
 │
 ├── Data/
 │ └── AppDbContext.cs
+├── Docs/
+│ ├── Swagger.png
+│ ├── Swagger1.png
+│ └── Swagger2.png
 │
-└── appsettings.json
+├── appsettings.json
+│
+└── README.md
 ```
 
 ---
 
 ## 📡 Endpoints principales
+
 ### 🟦 Artículos
+
 | Método | Endpoint | Descripción |
 |--------|-----------|-------------|
 | **GET** | `/api/articulos` | Obtiene todos los artículos. |
@@ -61,16 +77,23 @@ AppWeb.API/
 | **POST** | `/api/articulos` | Agrega un nuevo artículo. |
 | **PUT** | `/api/articulos/{id}` | Modifica un artículo existente. |
 | **DELETE** | `/api/articulos/{id}` | Elimina un artículo por su ID. |
+
+---
+
 ### 🟧 Categorías
+
 | Método | Endpoint | Descripción |
 |--------|-----------|-------------|
-| **GET** | `/api/marcas` | Obtiene todas las marcas. |
-| **GET** | `/api/marcas/{id}` | Obtiene una marca por su ID. |
-| **POST** | `/api/marcas` | Agrega una nueva marca. |
-| **PUT** | `/api/marcas/{id}` | Modifica una marca existente. |
-| **DELETE** | `/api/marcas/{id}` | Elimina una marca por su ID. |
+| **GET** | `/api/categorias` | Obtiene todas las categorías. |
+| **GET** | `/api/categorias/{id}` | Obtiene una categoría por su ID. |
+| **POST** | `/api/categorias` | Agrega una nueva categoría. |
+| **PUT** | `/api/categorias/{id}` | Modifica una categoría existente. |
+| **DELETE** | `/api/categorias/{id}` | Elimina una categoría por su ID. |
+
+---
 
 ### 🟥 Marcas
+
 | Método | Endpoint | Descripción |
 |--------|-----------|-------------|
 | **GET** | `/api/marcas` | Obtiene todas las marcas. |
@@ -79,16 +102,31 @@ AppWeb.API/
 | **PUT** | `/api/marcas/{id}` | Modifica una marca existente. |
 | **DELETE** | `/api/marcas/{id}` | Elimina una marca por su ID. |
 
- 
-  ## 🔍 Swagger
+---
+
+## 🔍 Swagger
+
+Swagger se habilita automáticamente al ejecutar el proyecto en modo Development.
+
+URL típica:
+
+https://localhost
+:<puerto>/swagger
+
+---
+
+## 📸 Capturas de Swagger (Pruebas reales)
+
+### Listado de artículos
+![GET Artículos](docs/Swagger.png)
+
+### Creación de artículo
+![POST Artículos](docs/Swagger1.png)
+
+### Categorías
+![GET Categorías](docs/Swagger2.png)
   
-[https://localhost:<puerto>/swagger](https://localhost:7125/swagger/v1/swagger.json)
-  
-  --- 
-  
-  👨‍💻 Autor Octavio Duarte  
-  Desarrollador Back-End | .NET & C#  
-  📍 Valencia, España  
+  ---
 
 ## ⚠️ Nota sobre la base de datos
 
@@ -99,8 +137,18 @@ Este proyecto utiliza una base de datos local preexistente llamada **CATALOGO_DB
 - Marcas  
 
 Actualmente **no se incluye un script SQL** para crear estas tablas, ya que la base proviene de un proyecto anterior y fue reutilizada para esta API.
+
 Por este motivo, **la API no puede ejecutarse directamente en otros ordenadores** sin recrear manualmente la estructura de la base de datos.
-No obstante, en la sección “Capturas de Swagger” se muestran pruebas reales de la API funcionando correctamente con la base de datos existente.
+
+En la sección “Capturas de Swagger” se muestran pruebas reales de la API en funcionamiento.
+
+---
+
+## 👤 Autor
+
+**Octavio Duarte**  
+Desarrollador Back-End | .NET & C#  
+📍 Valencia, España  
 
 
 
