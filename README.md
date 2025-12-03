@@ -109,20 +109,28 @@ AppWeb.API/
 
 Swagger se habilita automáticamente al ejecutar el proyecto en modo Development.
 
-URL típica:
+URL:
 
-https://localhost:<puerto>/swagger
+[https://localhost:<puerto>/swagger](https://localhost:7125/swagger/v1/swagger.json)
 
 ## 📸 Capturas de Swagger (Pruebas reales)
 
-Ejemplos incluidos:
+Las siguientes imágenes muestran la API funcionando correctamente con la base de datos local.
 
-- `catalogo.png`
-- `get_articulo.png`
-- `get_categoria.png`
-- `post_articulo.png`
+> Todas las capturas se encuentran en la carpeta:  
+> **`/Docs`**
 
-Estas imágenes muestran el correcto funcionamiento de los endpoints principales.
+### 🔹 GET — Obtener artículos
+![GET Artículos](Docs/get_articulo.png)
+
+### 🔹 GET — Obtener categorías
+![GET Categorías](Docs/get_categoria.png)
+
+### 🔹 POST — Crear artículo
+![POST Artículo](Docs/post_articulo.png)
+
+### 🔹 Vista general
+![Vista general](Docs/catalogo.png)
   
   ---
 
